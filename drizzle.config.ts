@@ -1,9 +1,12 @@
-import type { Config } from "@planetscale/database";
+import { type Config } from "drizzle-kit";
 
 import { env } from "~/env";
 
 export default {
-	host: env.DATABASE_HOST,
-	username: env.DATABASE_USERNAME,
-	password: env.DATABASE_PASSWORD,
+	schema: "./src/server/db/schema.ts",
+	driver: "mysql2",
+	dbCredentials: {
+		uri: env.DATABASE_URL,
+	},
+	tablesFilter: ["music_*"],
 } satisfies Config;
