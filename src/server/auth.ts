@@ -5,7 +5,9 @@ import {
 	type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
+import DiscordProvider from "next-auth/providers/discord";
 
+import { env } from "~/env";
 import { db } from "~/server/db";
 import { mysqlTable } from "~/server/db/schema";
 
@@ -47,10 +49,10 @@ export const authOptions: NextAuthOptions = {
 	},
 	adapter: DrizzleAdapter(db, mysqlTable) as Adapter,
 	providers: [
-		// DiscordProvider({
-		//   clientId: env.DISCORD_CLIENT_ID,
-		//   clientSecret: env.DISCORD_CLIENT_SECRET,
-		// }),
+		DiscordProvider({
+		  clientId: env.DISCORD_CLIENT_ID,
+		  clientSecret: env.DISCORD_CLIENT_SECRET,
+		}),
 		/**
 		 * ...add more providers here.
 		 *
