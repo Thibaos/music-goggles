@@ -35,29 +35,28 @@ function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
 
   return (
     <nav className={cn("flex items-center gap-2", className)} {...props}>
-      <Button
-        variant={pathname === "/" ? "secondary" : "link"}
-        disabled={pathname === "/"}
-      >
-        <Link
-          href="/"
-          className="text-sm font-medium transition-colors hover:text-primary"
-        >
-          Home
-        </Link>
-      </Button>
-      <Button
-        variant={pathname === "/title" ? "secondary" : "link"}
-        disabled={pathname === "/title"}
-      >
-        <Link
-          href="/title"
-          className="text-sm font-medium transition-colors hover:text-primary"
-        >
-          Title
-        </Link>
-      </Button>
+      <NavLink label="Home" href="/" />
+      <NavLink label="Play" href="/title" />
+      <NavLink label="List" href="/list" />
     </nav>
+  );
+}
+
+function NavLink(props: { label: string; href: string }) {
+  const pathname = usePathname();
+
+  return (
+    <Button
+      variant={pathname === props.href ? "secondary" : "link"}
+      disabled={pathname === props.href}
+    >
+      <Link
+        href={props.href}
+        className="text-sm font-medium transition-colors hover:text-primary"
+      >
+        {props.label}
+      </Link>
+    </Button>
   );
 }
 

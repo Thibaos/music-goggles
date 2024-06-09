@@ -1,29 +1,38 @@
+"use client";
+
 import { PlayIcon } from "@radix-ui/react-icons";
-import { Boxes } from "~/components/ui/background-boxes";
+import { AnimatedGridPattern } from "~/components/ui/bg-animated-grid";
 import { Button } from "~/components/ui/button";
+import { cn } from "~/lib/utils";
 
-export default function BackgroundBoxesDemo() {
+export default function BackgroundBoxes() {
   return (
-    <main className="absolute -z-10 top-0 w-full h-lvh overflow-hidden flex items-center justify-center">
-      <div className="overflow-hidden h-full w-full flex flex-col items-center justify-center rounded-lg">
-        <div
-          className="absolute inset-0 w-full h-full bg-background z-10 pointer-events-none"
-          style={{
-            maskImage: "radial-gradient(transparent, white)",
-          }}
+    <main
+      className={cn(
+        "absolute -z-10 top-0 w-full h-lvh flex items-center justify-center ",
+      )}
+    >
+      <div
+        className="absolute w-full h-full overflow-hidden"
+        style={{
+          maskImage: "radial-gradient(white,transparent 65%)",
+        }}
+      >
+        <AnimatedGridPattern
+          width={64}
+          height={64}
+          className={cn("inset-x-0 inset-y-[-30%] h-[200%] skew-y-12")}
         />
-
-        <Boxes />
-
-        <Button
-          className={"z-20 rounded-full w-24 h-24"}
-          variant={"outline"}
-          size={"icon"}
-          style={{ backdropFilter: "blur(8px)" }}
-        >
-          <PlayIcon />
-        </Button>
       </div>
+
+      <Button
+        className={"z-20 rounded-full w-24 h-24"}
+        variant={"outline"}
+        size={"icon"}
+        style={{ backdropFilter: "blur(4px)" }}
+      >
+        <PlayIcon />
+      </Button>
     </main>
   );
 }
